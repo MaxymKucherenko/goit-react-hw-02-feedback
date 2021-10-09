@@ -41,7 +41,7 @@ class App extends React.Component {
           clickButton={this.onClick}
           options={["good", "neutral", "bad"]}
         />
-
+        
         <Section title="Statistics">
           {total > 0 ? (
             <Statistics
