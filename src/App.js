@@ -1,7 +1,7 @@
 import React from "react";
 import Controls from "./Components/buttons/Buttons";
 import Section from "./Components/SectionTitle/SectionTitle";
-import Statistics from "./Components/Statistics/statistics";
+import Statistics from "./Components/Statistics/Statistics";
 import Notification from "./Components/SectionTitle/Notification";
 import "./App.css";
 
@@ -12,17 +12,26 @@ class App extends React.Component {
     bad: 0,
   };
 
-  onClick = (Name) => {
+  onClick = (name) => {
     this.setState((prevState) => ({
-      [Name]: prevState[Name] + 1,
+      [name]: prevState[name] + 1,
     }));
   };
 
+  countTotal = () => {
+    const { good, neutral, bad } = this.state;
+    return good + neutral + bad;
+  };
+
+  countPercent = () => {
+    const { good } = this.state;
+    const total = this.countTotal();
+    return Math.round((good / total) * 100);
+  }
+
   render() {
-    const total = Object.values(this.state).reduce((item, acc) => {
-      return (acc += item);
-    }, 0);
-    const percent = Math.round((this.state.good / total) * 100);
+    const total = this.countTotal();
+    const percent = this.countPercent();
     return (
       <div className="App">
         <header className="App-header">
